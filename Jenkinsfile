@@ -19,15 +19,6 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexus-cred"
     }
     stages {
-        stage("clone code") {
-            steps {
-                script {
-                    // Let's clone the source
-                    git credentialsId: 'GH_private_key',
-                    git 'git@github.com:Yakushi12/spring-petclinic.git';
-                }
-            }
-        }
         stage("mvn build") {
             steps {
                 script {
