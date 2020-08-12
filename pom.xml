@@ -71,6 +71,12 @@
     </dependency>
 
     <!-- Databases - Uses H2 by default -->
+    <!-- https://mvnrepository.com/artifact/com.google.cloud.sql/mysql-socket-factory -->
+    <dependency>
+      <groupId>com.google.cloud.sql</groupId>
+      <artifactId>mysql-socket-factory</artifactId>
+      <version>1.0.16</version>
+    </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -81,18 +87,8 @@
       <artifactId>mysql-connector-java</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.mysql.jdbc/com.springsource.com.mysql.jdbc -->
     
-    <!--Spring JDBC, Cloud GCP SQL Starter -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-gcp-starter-sql</artifactId>
-      <version>1.0.0.BUILD-SNAPSHOT</version>
-    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.mysql.jdbc/com.springsource.com.mysql.jdbc -->
 
     <!-- caching -->
     <dependency>
