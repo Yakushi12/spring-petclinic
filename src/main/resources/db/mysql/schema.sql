@@ -53,4 +53,3 @@ CREATE TABLE IF NOT EXISTS visits (
   description VARCHAR(255),
   FOREIGN KEY (pet_id) REFERENCES pets(id)
 ) engine=InnoDB;
-GRANT ALL PRIVILEGES ON petclinic.* TO 'petclinic@%';
