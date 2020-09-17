@@ -1,4 +1,3 @@
-GRANT ALL PRIVILEGES ON petclinic.* TO 'petclinic@%';
 CREATE TABLE IF NOT EXISTS vets (
   id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30),
@@ -54,3 +53,4 @@ CREATE TABLE IF NOT EXISTS visits (
   description VARCHAR(255),
   FOREIGN KEY (pet_id) REFERENCES pets(id)
 ) engine=InnoDB;
+GRANT ALL PRIVILEGES ON petclinic.* TO 'petclinic@%';
