@@ -24,6 +24,8 @@ services:
       - ./Docker/mysql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     logging:
       driver: gcplogs
+      options:
+        gcp-project: gd-gcp-internship-kha-koh
 
   petclinic:
     image: spring-petclinic-swarm
@@ -41,6 +43,9 @@ services:
       replicas: 3
     logging:
       driver: gcplogs
+      options:
+        gcp-project: gd-gcp-internship-kha-koh
+
 
   nginx:
     image: nginx:stable-perl
@@ -54,3 +59,5 @@ services:
       replicas: 1
     logging:
       driver: gcplogs
+      options:
+        gcp-project: gd-gcp-internship-kha-koh
