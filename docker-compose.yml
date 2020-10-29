@@ -1,12 +1,61 @@
-mysql:
-  image: mysql:5.7
-  ports:
-    - "3306:3306"
-  environment:
-    - MYSQL_ROOT_PASSWORD=
-    - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    - MYSQL_USER=petclinic
-    - MYSQL_PASSWORD=petclinic
-    - MYSQL_DATABASE=petclinic
-  volumes:
-    - "./conf.d:/etc/mysql/conf.d:ro"
+version: '3.7'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=petclinic
+      - MYSQL_PASSWORD=petclinic
+      - MYSQL_DATABASE=petclinic
+    volumes:
+      - ./Docker/db_data:/var/lib/mysql
+      - ./Docker/mysql/:/etc/mysql/
+    networks:
+      - pet_net
+
+  nginx:
+    image: nginx:stable-perl
+    depends_on:
+      - petclinic
+    ports:
+      - "18080-18085:80"
+    volumes:
+      - ./Docker/nginx/nginx.conf:/etc/nginx/nginx.conf  #/etc/nginx/conf.d/nginx.conf
+    networks:
+      - pet_net
+    deploy:
+      replicas: 3
+
+  petclinic:
+    build:
+      context: .
+      dockerfile: ./Docker/Dockerfile
+    # ports:
+    #   - "18080-18085:8080"
+    depends_on:
+      - mysql
+    environment:
+      - MY_SQL_PROFILE=mysql
+      - MY_SQL_URL=mysql
+      - MY_SQL_PORT=3306
+      - MY_SQL_USERNAME=petclinic
+      - MY_SQL_PASSWORD=petclinic
+      - MY_SQL_DB_NAME=petclinic
+      # - SERVICE_NAME=petclinic
+      # - SERVICE_TAGS=dev
+    networks:
+      - pet_net
+    deploy:
+      replicas: 3
+
+volumes:
+    db_data:
+      driver: local
+
+networks:
+  pet_net:
+    driver: bridge
